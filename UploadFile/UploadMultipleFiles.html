@@ -1,0 +1,202 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UploadFiles</title>
+    <style>
+        input {
+            margin: 10px;
+            background-color: cadetblue;
+            color: white;
+            border: none;
+        }
+        button {
+            margin: 10px;
+            background-color: cadetblue;
+            color: white;
+            border: none;
+        }
+        input:hover {
+            background-color: #2f4f4f;
+        }
+        img {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+    </style>
+    <input multiple onchange="handleChanger(event)" type="file">
+    <button>submit</button>
+    <script>
+        let body = document.querySelector('body');
+        function handleChanger(e) {
+
+let arr = [...e.target.files];
+console.log(arr)
+
+            // arr.forEach((ele,i) => {
+            //     let reader = new FileReader();
+            //     reader.readAsDataURL(ele);
+            arr.forEach((files,i) => {
+                let reader = new FileReader();
+                reader.readAsDataURL(files);
+                let imageTag = document.createElement('img');
+
+                reader.onload = () => {
+                    console.log(reader.result)
+                    imageTag.src = reader.result
+
+                body.appendChild(imageTag);
+
+                }
+                reader.onerror = () => {
+                    console.log( reader.error);
+                }
+            })  
+       
+           
+        
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Files</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            background-color: #004d40;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #388e3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2e7d32;
+        }
+
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        img {
+            height: 200px;
+            width: 200px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Image Uploader</h1>
+    <input multiple onchange="handleChanger(event)" type="file" />
+    <button onclick="clearImages()">Clear</button>
+
+    <div class="preview-container" id="previewContainer"></div>
+
+    <script>
+        const previewContainer = document.getElementById("previewContainer");
+
+        function handleChanger(e) {
+            const files = [...e.target.files];
+            files.forEach((file) => {
+                const reader = new FileReader();
+                const imageTag = document.createElement("img");
+
+                reader.onload = () => {
+                    imageTag.src = reader.result;
+                    previewContainer.appendChild(imageTag);
+                };
+
+                reader.onerror = () => {
+                    console.error(reader.error);
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function clearImages() {
+            previewContainer.innerHTML = '';
+        }
+    </script>
+</body>
+
+</html>
+  -->

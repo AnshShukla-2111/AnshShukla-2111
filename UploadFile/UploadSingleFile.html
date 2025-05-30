@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UploadFiles</title>
+    <style>
+        img{
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+    </style>
+    <input   onchange="handleChanger(event)" type="file">
+    <button>submit</button>
+    <script>
+        let body = document.querySelector('body');
+        function handleChanger(e) {
+
+            let imageTag = document.createElement('img');
+
+            let file = e.target.files[0];
+
+            console.log(file)
+
+            let reader = new FileReader();
+
+            reader.readAsDataURL(file);
+
+
+             reader.onload = () => {
+console.log(reader.result)
+imageTag.src = reader.result
+             }
+
+
+             reader.onerror = () => {
+                console.log('Error: ', reader.error);
+             }
+             body.appendChild(imageTag);
+            
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
