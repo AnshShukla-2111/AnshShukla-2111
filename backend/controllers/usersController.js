@@ -275,7 +275,15 @@ try {
 }
 }
 
-
+const getLoggedInUSer = async(req,res)=>{
+  try {
+    const {_id} = req.user;
+   let user = await userCollection.findById(_id).select('-password');
+   res.status(200).json({user})
+  } catch (error) {
+   res.status(500).json({error:error.message})
+  }
+}
 
 export {
   registerUser,
@@ -288,6 +296,7 @@ export {
   searchFriend,
   getFriend,
   followUnfollowUser,
+  getLoggedInUSer,
 };
 
 

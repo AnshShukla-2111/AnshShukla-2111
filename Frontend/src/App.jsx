@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -15,11 +15,25 @@ import ForgetPassword from "./pages/ForgetPassword";
 import UserProfile from "./pages/UserProfile";
 import FriendProfile from "./pages/FriendProfile";
 
+
+import { fetchUserByToken } from "./redux/userSlice";
+
+
 const App = () => {
   let userSlice = useSelector((state) => state.users);
   console.log(userSlice);
   let login = userSlice.login; // false
   let dispatch = useDispatch();
+
+
+
+
+
+  useEffect(()=>{
+    if(userSlice.token){
+      dispatch(fetchUserByToken(userSlice.token))
+    }
+   },[userSlice.token])
 
   return (
     <div className=" min-h-screen">

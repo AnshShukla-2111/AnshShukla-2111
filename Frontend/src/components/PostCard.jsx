@@ -181,7 +181,7 @@ export default function PostCard(props) {
       </AspectRatio> */}
 
           <Slider {...settings}>
-            {obj.file.map((file, i) => {
+            {obj?.file?.map((file, i) => {
               return file.includes("image") ? (
                 <img src={file} alt="" />
               ) : (
@@ -225,7 +225,7 @@ export default function PostCard(props) {
           sx={{ alignItems: "center", mx: -1 }}
         >
           <Box sx={{ display: "flex", gap: 0.5 }}>
-            {obj.likes.includes(userSlice.user._id) ? (
+            {obj?.likes?.includes(userSlice?.user?._id) ? (
               <IconButton
                 onClick={likeOrDislikePost}
                 variant="plain"

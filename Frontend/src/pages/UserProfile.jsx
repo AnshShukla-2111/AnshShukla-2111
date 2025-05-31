@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { FaCamera } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePic } from "../redux/userSlice";
+// import { updatePic } from "../redux/userSlice";
 import axios from "axios";
 import PostCard from "../components/PostCard";
+import { fetchUserByToken } from "../redux/userSlice";
 
 const UserProfile = () => {
  
@@ -48,7 +49,8 @@ console.log(url)
    let data1 = res1.data;
    console.log(data1)
    if(res1.status==200){
-      dispatch(updatePic({name,url}))
+      // dispatch(updatePic({name,url}))
+      dispatch(fetchUserByToken(userSlice?.token));
    }
   }
   // let profilePic = userSlice.user.profilePic
@@ -85,7 +87,7 @@ console.log(url)
     <div className="container w-[90%]  m-auto ">
       <div className="w-full h-[50vh] relative">
         <img
-          src={user.coverPic}
+          src={user?.coverPic}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -108,13 +110,13 @@ console.log(url)
         "
         >
           <img
-            src={user.profilePic}
+            src={user?.profilePic}
             alt=""
             className="w-full h-full rounded-full object-cover"
           />
 
           <p className="text-center text-xl font-semibold">
-            {userSlice.user.name}
+            {userSlice?.user?.name}
           </p>
           <div className="absolute top-0 right-6">
             <label htmlFor="cover">
@@ -133,11 +135,11 @@ console.log(url)
       <div className="flex justify-center items-center gap-10 mt-5">
         <div className="box flex flex-col justify-center items-center text-xl">
           <h3 className="font-semibold">Followers</h3>
-          <p>{userSlice.user.followers.length}</p>
+          <p>{userSlice?.user?.followers?.length}</p>
         </div>
         <div className="box flex flex-col justify-center items-center text-xl">
           <h3 className="font-semibold">Followings</h3>
-          <p>{userSlice.user.followings.length}</p>
+          <p>{userSlice?.user?.followings?.length}</p>
         </div>
       </div>
       <div className="flex w-[400px] m-auto mt-[180px] flex-col gap-2">

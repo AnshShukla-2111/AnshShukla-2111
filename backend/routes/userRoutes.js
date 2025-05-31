@@ -4,6 +4,7 @@ import {
   followUnfollowUser,
   forgetPassword,
   getFriend,
+  getLoggedInUSer,
   loginUser,
   registerUser,
   resetPassword,
@@ -20,6 +21,10 @@ import checkToken from "../middleware/checkToken.js";
 
 router.post('/create',registerUser)
 router.post('/login',loginUser)
+
+router.get("/loggedInUser", checkToken, getLoggedInUSer);
+
+
 router.put("/updateUser", checkToken,updateUser);
 router.delete("/DeleteUser", checkToken,deleteUser);
 router.post("/forgetPassword",forgetPassword );

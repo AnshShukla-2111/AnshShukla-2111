@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import PostCard from '../components/PostCard';
 import { toast } from "react-toastify";
+import { fetchUserByToken } from '../redux/userSlice';
 
 const FriendProfile = () => {
 
@@ -17,6 +18,9 @@ const FriendProfile = () => {
     // console.log(location)
     let friendId = location.state;
     console.log(friendId);
+
+
+    let dispatch = useDispatch();
 
     let getFriendData = async () => {
       let res = await axios.get(
@@ -53,6 +57,7 @@ const FriendProfile = () => {
       let data = res.data;
       if (res.status == 200) {
         toast.success(data.msg);
+        dispatch(fetchUserByToken(userSlice?.token));
         getFriendData();
       }
     }
